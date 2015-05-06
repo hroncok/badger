@@ -63,8 +63,10 @@ def transactions():
     badges = [kv[0] for kv in sorted(badges.items(), key=operator.itemgetter(1))]
     return {'badges': badges, 'transactions': transactions}
 
+
 def save_json(filename, what):
     with open(filename, 'w') as f:
         f.write(json.dumps(what))
+
 
 save_json('data.json', transactions())
