@@ -70,6 +70,9 @@ def transactions():
 
 
 def save_json(filename, what):
+    """
+    Saves a dictionary to a file for a later use (as JSON)
+    """
     with open(filename, 'w') as f:
         f.write(json.dumps(what))
 
