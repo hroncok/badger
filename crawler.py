@@ -4,7 +4,7 @@ import requests
 import time
 
 
-LIMIT = 5
+LIMIT = 10
 # LIMIT = 20000
 BADGELIMIT = 15
 # BADGELIMIT = 400

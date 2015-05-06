@@ -24,8 +24,8 @@ def association_rules(data):
 
     # pymining dance
     relim_input = itemmining.get_relim_input(transactions)
-    item_sets = itemmining.relim(relim_input, min_support=4)
-    rules = assocrules.mine_assoc_rules(item_sets, min_support=4, min_confidence=0.6)
+    item_sets = itemmining.relim(relim_input, min_support=7)
+    rules = assocrules.mine_assoc_rules(item_sets, min_support=7, min_confidence=0.8)
 
     # translate identifiers back to badge names
     rules = [[frozenset(badges[ord(b)] for b in r[0]),
