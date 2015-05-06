@@ -1,6 +1,7 @@
 import json
 import operator
 import requests
+import time
 
 
 LIMIT = 100000
@@ -8,12 +9,15 @@ USERS = 'https://badges.fedoraproject.org/leaderboard/json?limit={limit}'.format
 USER = 'https://badges.fedoraproject.org/user/{user}/json'
 
 
-def data(url):
+def data(url, count=1):
     """
     For given URL, returns dictionary with data parsed from JSON
     """
     req = requests.get(url)
     if req.status_code != 200:
+        if count < 10:
+            time.sleep(5)
+            return data(url, count=count+1)
         raise Exception('Weird status code {code} at {url}'.format(code=req.status_code, url=url))
     return json.loads(req.text)
 
