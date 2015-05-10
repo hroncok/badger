@@ -4,10 +4,8 @@ import requests
 import time
 
 
-LIMIT = 10
-# LIMIT = 20000
-BADGELIMIT = 15
-# BADGELIMIT = 400
+LIMIT = 20000
+BADGELIMIT = 400
 
 USERS = 'https://badges.fedoraproject.org/leaderboard/json?limit={limit}'.format(limit=LIMIT)
 USER = 'https://badges.fedoraproject.org/user/{user}/json'
