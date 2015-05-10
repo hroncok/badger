@@ -77,4 +77,5 @@ def save_json(filename, what):
         f.write(json.dumps(what))
 
 
-save_json('data.json', transactions())
+if __name__ == '__main__':
+    save_json('data.json', transactions())
