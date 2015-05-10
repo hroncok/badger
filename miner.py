@@ -1,4 +1,5 @@
 import json
+import sys
 
 from pymining import itemmining, assocrules
 
@@ -50,8 +51,27 @@ def print_rules(rules):
                               ', '.join(rule[1]),
                               rule[2], rule[3]))
 
-u = 10
-b = 15
-s= 7
-c = 0.8
-print_rules(association_rules(load_json('data.json', u, b), min_support=s, min_confidence=c))
+
+def parse(text, name, parser):
+    """
+    Returns parsed thing form text or exits with explanation
+    """
+    try:
+        return parser(text)
+    except ValueError:
+        sys.stderr.write('{0} has to be {1}\n'.format(name, parser.__name__))
+        exit(1)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) not in [3, 5]:
+        sys.stderr.write(
+            'Usage: miner <min_support> <min_confidence> [<user_limit> <badge_limit>]\n')
+        exit(1)
+
+    s = parse(sys.argv[1], 'min_support', int)
+    c = parse(sys.argv[2], 'min_confidence', float)
+    if len(sys.argv) == 5:
+        u = parse(sys.argv[3], 'user_limit', int)
+        b = parse(sys.argv[4], 'badge_limit', int)
+    print_rules(association_rules(load_json('data.json', u, b), min_support=s, min_confidence=c))
