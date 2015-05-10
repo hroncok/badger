@@ -15,12 +15,16 @@ def data(url, count=1):
     """
     For given URL, returns dictionary with data parsed from JSON
     """
-    req = requests.get(url)
-    if req.status_code != 200:
+    try:
+        req = requests.get(url)
+        code = req.status_code
+    except Exception:
+        code = 666
+    if code != 200:
         if count < 10:
             time.sleep(5)
             return data(url, count=count+1)
-        raise Exception('Weird status code {code} at {url}'.format(code=req.status_code, url=url))
+        raise Exception('Weird status code {code} at {url}'.format(code=code, url=url))
     return json.loads(req.text)
 
 
