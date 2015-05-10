@@ -36,7 +36,7 @@ The idea
 
 The original idea was to get all the results, look at them and either filter them manually or by some other scripted logic, to avoid Cpt. Obvious rules, such as:
 
-    if-you-build-it...-koji-success-ii -> if-you-build-it...-koji-success-i with support XXX and confidence 1.0
+    if-you-build-it...-koji-success-ii -> if-you-build-it...-koji-success-i with support 820 and confidence 1.0
 
 Meaning if user has [If you build it... (Koji Success II)](https://badges.fedoraproject.org/badge/if-you-build-it...-koji-success-ii) they will most certainly get [If you build it... (Koji Success I)](https://badges.fedoraproject.org/badge/if-you-build-it...-koji-success-i). This information is useless, because users allways get those badges in order that makes *Koji Success I* actually a dependency of *Koji Success II*.
 
