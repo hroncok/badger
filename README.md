@@ -34,7 +34,7 @@ Note that downloading the data from Badges API will take it's time. Therefore `d
 The idea
 --------
 
-The original idea was to get all the results, look at them and either filter them manually or by some other scripted logic, to avoid Cpt. Obvious rules, such as:
+The original idea was to get all the results, look at them and either filter them manually or by some other scripted logic, to avoid capt. Obvious rules, such as:
 
     if-you-build-it...-koji-success-ii -> if-you-build-it...-koji-success-i with support 820 and confidence 1.0
 
