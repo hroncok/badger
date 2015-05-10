@@ -3,16 +3,21 @@ import json
 from pymining import itemmining, assocrules
 
 
-def load_json(filename):
+def load_json(filename, user_limit=0, badge_limit=0):
     """
     Loads data form JSON
     """
     with open(filename) as f:
         data = json.loads(f.read())
+    if user_limit:
+        data['transactions'] = data['transactions'][:user_limit]
+    if badge_limit:
+        data['badges'] = data['badges'][:badge_limit]
+        data['transactions'] = [[b for b in t if b < badge_limit] for t in data['transactions']]
     return data
 
 
-def association_rules(data):
+def association_rules(data, min_support, min_confidence):
     """
     Generates association rules from crawled data
     """
@@ -24,8 +29,9 @@ def association_rules(data):
 
     # pymining dance
     relim_input = itemmining.get_relim_input(transactions)
-    item_sets = itemmining.relim(relim_input, min_support=7)
-    rules = assocrules.mine_assoc_rules(item_sets, min_support=7, min_confidence=0.8)
+    item_sets = itemmining.relim(relim_input, min_support=min_support)
+    rules = assocrules.mine_assoc_rules(item_sets, min_support=min_support,
+                                        min_confidence=min_confidence)
 
     # translate identifiers back to badge names
     rules = [[frozenset(badges[ord(b)] for b in r[0]),
@@ -44,4 +50,8 @@ def print_rules(rules):
                               ', '.join(rule[1]),
                               rule[2], rule[3]))
 
-print_rules(association_rules(load_json('data.json')))
+u = 10
+b = 15
+s= 7
+c = 0.8
+print_rules(association_rules(load_json('data.json', u, b), min_support=s, min_confidence=c))
