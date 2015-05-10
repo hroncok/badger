@@ -5,7 +5,6 @@ import time
 
 
 LIMIT = 20000
-BADGELIMIT = 400
 
 USERS = 'https://badges.fedoraproject.org/leaderboard/json?limit={limit}'.format(limit=LIMIT)
 USER = 'https://badges.fedoraproject.org/user/{user}/json'
@@ -63,8 +62,7 @@ def transactions():
             if badge not in badges:
                 badges[badge] = nextid
                 nextid += 1
-            if badges[badge] < BADGELIMIT:
-                transaction.append(badges[badge])
+            transaction.append(badges[badge])
         if transaction:
             transactions.append(transaction)
     badges = [kv[0] for kv in sorted(badges.items(), key=operator.itemgetter(1))]
